@@ -1,14 +1,14 @@
-let language = "en";
-let player = "";
-let difficulty = "";
-let score = 0;
-let currentQuestion = 0;
-let maxQuestions = 5;
-let timer = 30;
+let player="";
+let score=0;
+let currentQuestion=0;
+let maxQuestions=5;
+let timer=30;
 let timerInterval;
+let stage="easy"; // easy → normal → hard
+let allQuestions;
 
-// Questions
-let easyQuestions = [
+// QUESTIONS
+const easyQuestions = [
 {question:"If P = true and Q = true, what is P ∧ Q?", choices:["True","False"], answer:"True"},
 {question:"If P = true and Q = false, what is P ∧ Q?", choices:["True","False"], answer:"False"},
 {question:"If P = false and Q = true, what is P ∨ Q?", choices:["True","False"], answer:"True"},
@@ -16,7 +16,7 @@ let easyQuestions = [
 {question:"If P = false and Q = false, what is P ∨ Q?", choices:["True","False"], answer:"False"}
 ];
 
-let normalQuestions = [
+const normalQuestions = [
 {question:"If P = true and Q = false, what is P → Q?", choices:["True","False"], answer:"False"},
 {question:"If P = false and Q = true, what is P → Q?", choices:["True","False"], answer:"True"},
 {question:"If P = true and Q = false, what is P ∨ Q?", choices:["True","False"], answer:"True"},
@@ -26,7 +26,7 @@ let normalQuestions = [
 {question:"Translate: 'All students study'", choices:["∀x Student(x) → Study(x)","∃x Student(x) → Study(x)","∀x Student(x) ∧ Study(x)"], answer:"∀x Student(x) → Study(x)"}
 ];
 
-let hardQuestions = [
+const hardQuestions = [
 {question:"What does ∀x P(x) mean?", choices:["P is true for all x","P is true for some x","P is false"], answer:"P is true for all x"},
 {question:"What does ∃x P(x) mean?", choices:["P is true for at least one x","P is true for all x","P is false"], answer:"P is true for at least one x"},
 {question:"Translate: 'There exists a student who likes math'", choices:["∃x Student(x) ∧ LikesMath(x)","∀x Student(x) ∧ LikesMath(x)","∀x Student(x) → Study(x)"], answer:"∃x Student(x) ∧ LikesMath(x)"},
@@ -39,137 +39,112 @@ let hardQuestions = [
 {question:"Translate: 'Some students are programmers'", choices:["∃x Student(x) ∧ Programmer(x)","∀x Student(x) ∧ Programmer(x)","∀x Student(x) → Programmer(x)"], answer:"∃x Student(x) ∧ Programmer(x)"}
 ];
 
-// MENU LOGIC
-function showLanguage(){
-document.getElementById("startScreen").classList.add("hidden");
-document.getElementById("languageScreen").classList.remove("hidden");
-}
-
-function setLanguage(lang){
-language = lang;
-document.getElementById("languageScreen").classList.add("hidden");
+// START GAME FROM INSTRUCTIONS
+function startGame(){
+document.getElementById("instructionsScreen").classList.add("hidden");
 document.getElementById("nameScreen").classList.remove("hidden");
 }
 
-function showDifficulty(){
-player = document.getElementById("playerName").value;
-if(player.trim() === "") { alert("Please enter your name!"); return; }
-document.getElementById("nameScreen").classList.add("hidden");
-document.getElementById("difficultyScreen").classList.remove("hidden");
-}
-
-// START GAME
-function startGame(level){
-difficulty = level;
-
-if(level=="easy"){questions = easyQuestions; maxQuestions=5;}
-if(level=="normal"){questions = normalQuestions; maxQuestions=7;}
-if(level=="hard"){questions = hardQuestions; maxQuestions=10;}
-
-questions = questions.sort(()=> Math.random()-0.5); // randomize
-score = 0;
+// START EASY MODE
+function startEasy(){
+player=document.getElementById("playerName").value;
+if(player.trim()===""){ alert("Enter your name!"); return; }
+stage="easy";
+allQuestions=easyQuestions.sort(()=>Math.random()-0.5);
+score=0;
 currentQuestion=0;
-timer=30;
-
-document.getElementById("difficultyScreen").classList.add("hidden");
-document.getElementById("gameScreen").classList.remove("hidden");
-document.getElementById("welcome").innerText = "Player: "+player;
-
+maxQuestions=allQuestions.length;
+showGameScreen();
 loadQuestion();
 startTimer();
 }
 
+// NEXT STAGE
+function nextStage(){
+if(stage=="easy"){ stage="normal"; allQuestions=normalQuestions.sort(()=>Math.random()-0.5); maxQuestions=allQuestions.length;}
+else if(stage=="normal"){ stage="hard"; allQuestions=hardQuestions.sort(()=>Math.random()-0.5); maxQuestions=allQuestions.length;}
+else{ showFinalResult(); return;}
+score=0;
+currentQuestion=0;
+showGameScreen();
+loadQuestion();
+startTimer();
+}
+
+// SHOW GAME SCREEN
+function showGameScreen(){
+document.getElementById("nameScreen").classList.add("hidden");
+document.getElementById("gameScreen").classList.remove("hidden");
+document.getElementById("welcome").innerText="Player: "+player;
+document.getElementById("stageLabel").innerText = stage.toUpperCase();
+document.getElementById("maxQuestions").innerText = maxQuestions;
+}
+
 // LOAD QUESTION
 function loadQuestion(){
-document.getElementById("number").innerText = currentQuestion+1;
-document.getElementById("score").innerText = score;
+document.getElementById("number").innerText=currentQuestion+1;
+document.getElementById("score").innerText=score;
+document.getElementById("stageLabel").innerText = stage.toUpperCase();
+document.getElementById("maxQuestions").innerText = maxQuestions;
 
-let q = questions[currentQuestion];
-document.getElementById("question").innerText = q.question;
+let q=allQuestions[currentQuestion];
+document.getElementById("question").innerText=q.question;
 
-let choicesDiv = document.getElementById("choices");
+let choicesDiv=document.getElementById("choices");
 choicesDiv.innerHTML="";
-for(let i=0;i<q.choices.length;i++){
-    let btn = document.createElement("button");
-    btn.innerText = q.choices[i];
-    btn.classList.add("neonBtn");
-    btn.onclick = ()=>answer(i);
-    choicesDiv.appendChild(btn);
-}
+q.choices.forEach((c,i)=>{
+let btn=document.createElement("button");
+btn.innerText=c;
+btn.classList.add("neonBtn");
+btn.onclick=()=>answer(i);
+choicesDiv.appendChild(btn);
+});
 }
 
 // TIMER
 function startTimer(){
 clearInterval(timerInterval);
-timer = 30;
-document.getElementById("timer").innerText = timer;
-timerInterval = setInterval(()=>{
-    timer--;
-    document.getElementById("timer").innerText = timer;
-    if(timer<=0){
-        clearInterval(timerInterval);
-        alert("Time's up!");
-        nextQuestion();
-    }
+timer=30;
+document.getElementById("timer").innerText=timer;
+timerInterval=setInterval(()=>{
+timer--;
+document.getElementById("timer").innerText=timer;
+if(timer<=0){ clearInterval(timerInterval); alert("Time's up!"); nextQuestion();}
 },1000);
 }
 
 // ANSWER
 function answer(choice){
 clearInterval(timerInterval);
-let q = questions[currentQuestion];
-let selected = q.choices[choice];
-
-if(selected === q.answer){
-    score++;
-}
-
+let q=allQuestions[currentQuestion];
+let selected=q.choices[choice];
+if(selected===q.answer){ score++; }
 nextQuestion();
 }
 
 // NEXT QUESTION
 function nextQuestion(){
 currentQuestion++;
-if(currentQuestion>=maxQuestions){
-    showResult();
-}else{
-    loadQuestion();
-    startTimer();
-}
+if(currentQuestion>=maxQuestions){ nextStage(); }
+else{ loadQuestion(); startTimer(); }
 }
 
-// SHOW RESULT
-function showResult(){
+// FINAL RESULT
+function showFinalResult(){
 document.getElementById("gameScreen").classList.add("hidden");
 document.getElementById("resultScreen").classList.remove("hidden");
-
-let totalQuestions = maxQuestions;
-let percent = (score/totalQuestions)*100;
-
-document.getElementById("finalScore").innerText = 
-"Total Score: "+score+" / "+totalQuestions+" ("+percent.toFixed(0)+"%)";
-
-document.getElementById("playerResult").innerText = 
-"Player: "+player;
-
+let percent=(score/maxQuestions)*100;
+document.getElementById("finalScore").innerText="Total Score: "+score+" / "+maxQuestions+" ("+percent.toFixed(0)+"%)";
+document.getElementById("playerResult").innerText="Player: "+player;
 // Rating
 let ratingText="";
 if(percent>=90) ratingText="Excellent 🏆";
 else if(percent>=78) ratingText="Good 👍";
 else ratingText="Try Again 🔁";
-
-let ratingEl = document.createElement("p");
+let ratingEl=document.createElement("p");
 ratingEl.innerText="Rating: "+ratingText;
 ratingEl.classList.add("neon");
 document.getElementById("resultScreen").appendChild(ratingEl);
-
 // Replay logic
-if(percent<78){
-    setTimeout(()=>{ alert("Score below passing! Replay the game."); restartGame(); },1000);
-}
-}
-
-// RESTART
-function restartGame(){
-location.reload();
+if(percent<78){ setTimeout(()=>{ alert("Score below passing! Replay the game."); location.reload(); },1000);}
 }

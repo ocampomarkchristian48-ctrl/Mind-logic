@@ -1,7 +1,9 @@
 body{
 margin:0;
-font-family:Arial;
-background:black;
+font-family:Arial, sans-serif;
+background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+background-size: 400% 400%;
+animation: gradientBG 15s ease infinite;
 color:white;
 display:flex;
 justify-content:center;
@@ -9,102 +11,100 @@ align-items:center;
 height:100vh;
 }
 
+@keyframes gradientBG {
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+
 .container{
 text-align:center;
 width:95%;
-max-width:600px;
-padding:10px;
+max-width:900px;
+padding:20px;
 }
 
-/* Neon Text */
 .neon{
 color:#39ff14;
-text-shadow:
-  0 0 5px #39ff14,
-  0 0 10px #39ff14,
-  0 0 20px #39ff14,
-  0 0 40px #0fa,
-  0 0 80px #0fa;
+text-shadow:0 0 5px #39ff14,0 0 10px #39ff14,0 0 20px #39ff14,0 0 40px #0fa,0 0 80px #0fa;
 animation: glow 1.5s ease-in-out infinite alternate;
 }
 
 @keyframes glow {
-  from { text-shadow: 0 0 5px #39ff14,0 0 10px #39ff14,0 0 20px #39ff14,0 0 40px #0fa,0 0 80px #0fa; }
-  to { text-shadow: 0 0 10px #39ff14,0 0 20px #39ff14,0 0 30px #39ff14,0 0 50px #0fa,0 0 100px #0fa; }
+from { text-shadow: 0 0 5px #39ff14,0 0 10px #39ff14,0 0 20px #39ff14,0 0 40px #0fa,0 0 80px #0fa; }
+to { text-shadow: 0 0 10px #39ff14,0 0 20px #39ff14,0 0 30px #39ff14,0 0 50px #0fa,0 0 100px #0fa; }
 }
 
-/* Neon Buttons */
 .neonBtn{
-background:black;
+background:#111;
 color:#0ff;
 border:2px solid #0ff;
 border-radius:12px;
-padding:15px 40px;
-font-size:20px;
+padding:18px 50px;
+font-size:24px;
 text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
-box-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
-transition: 0.3s;
+box-shadow: 0 0 15px #0ff, 0 0 25px #0ff;
+transition: all 0.3s;
 cursor:pointer;
 }
 
 .neonBtn:hover{
-box-shadow: 0 0 20px #0ff, 0 0 30px #0ff;
-text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+transform: scale(1.1);
+box-shadow: 0 0 25px #0ff, 0 0 40px #0ff;
+text-shadow: 0 0 15px #0ff, 0 0 25px #0ff;
 }
 
-/* Start button spacing */
-.startBtn{
-margin-top:20px;
-}
+.startBtn{margin-top:30px;}
+.normalText{color:white;font-size:26px;margin:10px 0;}
 
-/* Normal Text for Stage & Question Number */
-.normalText{
-color:white;
-font-size:22px;
-margin:5px 0;
-}
-
-/* Question Box */
+/* Landscape question box */
 .questionBox{
-background:#111;
+background: rgba(0,0,0,0.7);
 border:2px solid #39ff14;
-border-radius:12px;
-padding:15px;
-margin:15px 0;
+border-radius:15px;
+padding:20px;
+margin:20px auto;
+display:flex;
+flex-direction:row;
+justify-content:space-between;
+align-items:center;
+gap:20px;
+max-width:900px;
 }
 
 .questionText{
-font-size:24px;
+font-size:36px;
 color:#39ff14;
+line-height:1.4;
+flex:2;
 }
 
-/* Choices */
 .choicesBox{
 display:flex;
 flex-direction:column;
-gap:10px;
-margin-top:10px;
+gap:15px;
+flex:1;
 }
 
-/* Input Box */
 input{
-padding:12px;
-font-size:18px;
-border-radius:8px;
+padding:15px;
+font-size:22px;
+border-radius:10px;
 border:none;
-margin-top:10px;
+margin-top:15px;
 width:80%;
+text-align:center;
 }
 
-/* Instructions Box */
 .instructionsBox{
-background:#111;
+background: rgba(0,0,0,0.6);
 border:2px solid #0ff;
-border-radius:12px;
-padding:10px;
-margin:10px 0;
+border-radius:15px;
+padding:15px;
+margin:15px 0;
+font-size:20px;
+line-height:1.5;
 }
 
-.hidden{
-display:none;
-}
+.hidden{display:none;}
+.scoreText{font-size:26px;margin:5px 0;}

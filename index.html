@@ -8,28 +8,26 @@
 
 <div class="container">
 
-<!-- Neon Title -->
 <h1 class="title neon">MIND LOGIC</h1>
 
-<!-- INSTRUCTIONS -->
+<!-- Instructions -->
 <div id="instructionsScreen">
 <h2 class="neon">How to Play</h2>
 <div class="instructionsBox">
 <p>
-1️⃣ Enter your name.<br>
-2️⃣ Game has 3 stages: Easy → Normal → Hard.<br>
-3️⃣ Answer questions correctly. Timer 30s per question.<br>
-4️⃣ Passing score is 78% or higher.<br>
-5️⃣ If score &lt; 78%, you must replay.<br>
-6️⃣ Your total score and percentage will show at the end.<br>
-7️⃣ Questions are numbered and stage is shown.<br>
-8️⃣ Game is automatic: Easy → Normal → Hard.
+Enter your name.<br>
+Game has 3 stages: Easy → Normal → Hard.<br>
+Answer questions correctly. Timer 30s per question.<br>
+Passing score is 78% or higher.<br>
+Your total score and percentage will show at the end.<br>
+Questions are numbered and stage is shown.<br>
+Game is automatic: Easy → Normal → Hard.
 </p>
 </div>
 <button class="neonBtn startBtn" onclick="startGame()">Start Game</button>
 </div>
 
-<!-- NAME INPUT -->
+<!-- Name Input -->
 <div id="nameScreen" class="hidden">
 <h2 class="neon">Enter Your Name</h2>
 <input type="text" id="playerName" placeholder="Your name">
@@ -37,31 +35,37 @@
 <button class="neonBtn startBtn" onclick="startEasy()">Start Easy Mode</button>
 </div>
 
-<!-- GAME SCREEN -->
+<!-- Game Screen -->
 <div id="gameScreen" class="hidden">
 <h2 id="welcome" class="neon"></h2>
 
-<!-- Stage & Question Number -->
 <p class="normalText">Stage: <span id="stageLabel"></span></p>
 <p class="normalText">Question <span id="number">1</span> / <span id="maxQuestions">5</span></p>
 
-<!-- Question Box -->
 <div class="questionBox">
 <p id="question" class="questionText"></p>
 <div id="choices" class="choicesBox"></div>
 </div>
 
-<p class="neon">Score: <span id="score">0</span></p>
-<p class="neon">Time Left: <span id="timer">30</span>s</p>
+<p class="neon scoreText">Score: <span id="score">0</span></p>
+<p class="neon scoreText">Time Left: <span id="timer">30</span>s</p>
 </div>
 
-<!-- RESULT SCREEN -->
+<!-- Result Screen -->
 <div id="resultScreen" class="hidden">
 <h2 class="neon">Game Over</h2>
 <p id="finalScore" class="neon"></p>
 <p id="playerResult" class="neon"></p>
 </div>
 
+<!-- Sounds -->
+<audio id="themeSound" src="sounds/theme.mp3" loop></audio>
+<audio id="tickSound" src="sounds/tick.mp3"></audio>
+<audio id="correctSound" src="sounds/correct.mp3"></audio>
+<audio id="wrongSound" src="sounds/wrong.mp3"></audio>
+
 <script src="script.js"></script>
 </body>
 </html>
+Sent
+Write to

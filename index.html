@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mind Logic</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="home">
+<h1>🧠 Mind Logic</h1>
+<button onclick="showLanguage()">Start Game</button>
+</div>
+
+<div id="language" class="hidden">
+<h2>Select Language</h2>
+<button onclick="setLanguage('en')">English</button>
+<button onclick="setLanguage('tl')">Tagalog</button>
+</div>
+
+<div id="player" class="hidden">
+<h2>Enter Your Name</h2>
+<input type="text" id="playerName">
+<button onclick="showDifficulty()">Continue</button>
+</div>
+
+<div id="difficulty" class="hidden">
+<h2>Select Difficulty</h2>
+<button onclick="startGame('easy')">Easy (5)</button>
+<button onclick="startGame('normal')">Normal (7)</button>
+<button onclick="startGame('hard')">Hard (10)</button>
+</div>
+
+<div id="game" class="hidden">
+<h2 id="welcome"></h2>
+
+<p id="question"></p>
+
+<button onclick="answer(true)">True</button>
+<button onclick="answer(false)">False</button>
+
+<p>Score: <span id="score">0</span></p>
+<p>Question: <span id="number">1</span></p>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

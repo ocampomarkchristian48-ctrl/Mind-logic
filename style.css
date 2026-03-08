@@ -11,7 +11,9 @@ height:100vh;
 
 .container{
 text-align:center;
-width:600px;
+width:95%;
+max-width:600px;
+padding:10px;
 }
 
 /* Neon Text */
@@ -27,22 +29,8 @@ animation: glow 1.5s ease-in-out infinite alternate;
 }
 
 @keyframes glow {
-  from {
-    text-shadow:
-      0 0 5px #39ff14,
-      0 0 10px #39ff14,
-      0 0 20px #39ff14,
-      0 0 40px #0fa,
-      0 0 80px #0fa;
-  }
-  to {
-    text-shadow:
-      0 0 10px #39ff14,
-      0 0 20px #39ff14,
-      0 0 30px #39ff14,
-      0 0 50px #0fa,
-      0 0 100px #0fa;
-  }
+  from { text-shadow: 0 0 5px #39ff14,0 0 10px #39ff14,0 0 20px #39ff14,0 0 40px #0fa,0 0 80px #0fa; }
+  to { text-shadow: 0 0 10px #39ff14,0 0 20px #39ff14,0 0 30px #39ff14,0 0 50px #0fa,0 0 100px #0fa; }
 }
 
 /* Neon Buttons */
@@ -52,7 +40,7 @@ color:#0ff;
 border:2px solid #0ff;
 border-radius:12px;
 padding:15px 40px;
-font-size:24px;
+font-size:20px;
 text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
 box-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
 transition: 0.3s;
@@ -70,6 +58,7 @@ font-size:18px;
 border-radius:8px;
 border:none;
 margin-top:10px;
+width:80%;
 }
 
 .hidden{

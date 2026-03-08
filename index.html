@@ -14,17 +14,19 @@
 <!-- INSTRUCTIONS -->
 <div id="instructionsScreen">
 <h2 class="neon">How to Play</h2>
-<p class="neon">
-1️⃣ Enter your name. <br>
-2️⃣ Game has 3 stages: Easy → Normal → Hard. <br>
-3️⃣ Answer questions correctly. Timer 30s per question. <br>
-4️⃣ Passing score is 78% or higher. <br>
-5️⃣ If score &lt; 78%, you must replay. <br>
-6️⃣ Your total score and percentage will show at the end. <br>
-7️⃣ Questions are numbered and stage is shown. <br>
+<div class="instructionsBox">
+<p>
+1️⃣ Enter your name.<br>
+2️⃣ Game has 3 stages: Easy → Normal → Hard.<br>
+3️⃣ Answer questions correctly. Timer 30s per question.<br>
+4️⃣ Passing score is 78% or higher.<br>
+5️⃣ If score &lt; 78%, you must replay.<br>
+6️⃣ Your total score and percentage will show at the end.<br>
+7️⃣ Questions are numbered and stage is shown.<br>
 8️⃣ Game is automatic: Easy → Normal → Hard.
 </p>
-<button class="neonBtn" onclick="startGame()">Start Game</button>
+</div>
+<button class="neonBtn startBtn" onclick="startGame()">Start Game</button>
 </div>
 
 <!-- NAME INPUT -->
@@ -32,16 +34,23 @@
 <h2 class="neon">Enter Your Name</h2>
 <input type="text" id="playerName" placeholder="Your name">
 <br>
-<button class="neonBtn" onclick="startEasy()">Start Easy Mode</button>
+<button class="neonBtn startBtn" onclick="startEasy()">Start Easy Mode</button>
 </div>
 
 <!-- GAME SCREEN -->
 <div id="gameScreen" class="hidden">
 <h2 id="welcome" class="neon"></h2>
-<p class="neon">Stage: <span id="stageLabel"></span></p>
-<p class="neon">Question <span id="number">1</span> / <span id="maxQuestions">5</span></p>
-<p id="question" class="neon"></p>
-<div id="choices"></div>
+
+<!-- Stage & Question Number -->
+<p class="normalText">Stage: <span id="stageLabel"></span></p>
+<p class="normalText">Question <span id="number">1</span> / <span id="maxQuestions">5</span></p>
+
+<!-- Question Box -->
+<div class="questionBox">
+<p id="question" class="questionText"></p>
+<div id="choices" class="choicesBox"></div>
+</div>
+
 <p class="neon">Score: <span id="score">0</span></p>
 <p class="neon">Time Left: <span id="timer">30</span>s</p>
 </div>

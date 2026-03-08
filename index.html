@@ -4,47 +4,62 @@
 <title>Mind Logic</title>
 <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div id="home">
-<h1>🧠 Mind Logic</h1>
-<button onclick="showLanguage()">Start Game</button>
+<div class="container">
+
+<!-- Neon Title -->
+<h1 class="title neon">MIND LOGIC</h1>
+
+<!-- START SCREEN -->
+<div id="startScreen">
+<button class="startBtn neonBtn" onclick="showLanguage()">START GAME</button>
 </div>
 
-<div id="language" class="hidden">
-<h2>Select Language</h2>
-<button onclick="setLanguage('en')">English</button>
-<button onclick="setLanguage('tl')">Tagalog</button>
+<!-- LANGUAGE -->
+<div id="languageScreen" class="hidden">
+<h2 class="neon">Select Language</h2>
+<div class="langBox">
+<button class="neonBtn" onclick="setLanguage('en')">English</button>
+<button class="neonBtn" onclick="setLanguage('tl')">Tagalog</button>
+</div>
 </div>
 
-<div id="player" class="hidden">
-<h2>Enter Your Name</h2>
-<input type="text" id="playerName">
-<button onclick="showDifficulty()">Continue</button>
+<!-- NAME INPUT -->
+<div id="nameScreen" class="hidden">
+<h2 class="neon">Enter Your Name</h2>
+<input type="text" id="playerName" placeholder="Your name">
+<br>
+<button class="neonBtn" onclick="showDifficulty()">Play</button>
 </div>
 
-<div id="difficulty" class="hidden">
-<h2>Select Difficulty</h2>
-<button onclick="startGame('easy')">Easy (5)</button>
-<button onclick="startGame('normal')">Normal (7)</button>
-<button onclick="startGame('hard')">Hard (10)</button>
+<!-- DIFFICULTY -->
+<div id="difficultyScreen" class="hidden">
+<h2 class="neon">Select Difficulty</h2>
+<button class="neonBtn" onclick="startGame('easy')">Easy (5)</button>
+<button class="neonBtn" onclick="startGame('normal')">Normal (7)</button>
+<button class="neonBtn" onclick="startGame('hard')">Hard (10)</button>
 </div>
 
-<div id="game" class="hidden">
-<h2 id="welcome"></h2>
+<!-- GAME SCREEN -->
+<div id="gameScreen" class="hidden">
+<h2 id="welcome" class="neon"></h2>
+<p id="question" class="neon"></p>
+<div id="choices"></div>
+<p class="neon">Score: <span id="score">0</span></p>
+<p class="neon">Question: <span id="number">1</span></p>
+<p class="neon">Time Left: <span id="timer">30</span>s</p>
+</div>
 
-<p id="question"></p>
-
-<button onclick="answer(true)">True</button>
-<button onclick="answer(false)">False</button>
-
-<p>Score: <span id="score">0</span></p>
-<p>Question: <span id="number">1</span></p>
-
+<!-- RESULT SCREEN -->
+<div id="resultScreen" class="hidden">
+<h2 class="neon">Game Over</h2>
+<p id="finalScore" class="neon"></p>
+<p id="playerResult" class="neon"></p>
 </div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
+Sent
+Write to
